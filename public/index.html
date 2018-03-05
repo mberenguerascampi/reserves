@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pàdel Puig-reig</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/agency.min.css" rel="stylesheet">
+
+    <script src="//lightwidget.com/widgets/lightwidget.js"></script>
+
+    <!-- Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/ui/2.6.1/firebase-ui-auth__ca.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/2.5.1/firebase-ui-auth.css" /
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="js-scroll-trigger" href="#page-top">
+          <img class="img-logo-padel" src="img/logo_amb_lletres_v3.png" alt="">
+        </a>
+
+        <button class="btn btn-link btn-sm nav-link js-scroll-trigger sign-btn"  data-toggle="popover" data-placement="bottom" id="sign-in" data-content='<div id="firebaseui-auth-container"></div><div id="loader">Loading...</div>' style="display:none; padding: 4px !important;">
+        <i class="material-icons">&#xE853;</i>
+        </button>
+        <button class="btn btn-link btn-sm nav-link js-scroll-trigger sign-btn" id="sign-out" style="display:none; padding: 4px !important;">
+          <i class="material-icons">&#xE879;</i>
+        </button>
+        <div id="account-details"></div>
+        
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#news">Notícies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Com funciona?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#team">Classes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contactar</a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-lead-in">Benvinguts a la web de</div>
+          <div class="intro-heading text-uppercase">Pàdel Puig-reig</div>
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger"
+           id="reservationBtn">RESERVA</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Portfolio Grid -->
+    <section class="bg-light" id="news">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Notícies</h2>
+            <h3 class="section-subheading text-muted">Totes les novetats estan en el nostre instagram:</h3>
+          </div>
+        </div>
+        <div id="instafeed-row" class="row">
+      <!-- LightWidget WIDGET -->
+          <!-- <iframe src="//lightwidget.com/widgets/ba7f993f528b54cebd6e8ad0005e68b5.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe> -->
+          <ul id="instafeed"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Com funciona</h2>
+            <h3 class="section-subheading text-muted">Només cal seguir les següents instruccions:</h3>
+          </div>
+        </div>
+        <div class="row">
+          <img class="img-fluid img-instructions mx-auto" src="img/about/instruccions.jpg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="bg-light" id="team">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Els nostres professors</h2>
+            <h3 class="section-subheading text-muted">L'esport com a eina educativa i d'integració social.</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/roca.jpg" alt="">
+              <h4>Ramon Roca</h4>
+              <p class="text-muted">Entrenador junior</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/flores.jpg" alt="">
+              <h4>Francesc Flores</h4>
+              <p class="text-muted">Entrenador Senior</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="team-member">
+              <img class="mx-auto rounded-circle" src="img/team/sanchez.jpg" alt="">
+              <h4>Lluís Sánchez</h4>
+              <p class="text-muted">Entrenador senior</p>
+              <ul class="list-inline social-buttons">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clients -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <a href="#">
+              <img class="img-fluid d-block mx-auto" src="img/logos/envato.jpg" alt="">
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="#">
+              <img class="img-fluid d-block mx-auto" src="img/logos/designmodo.jpg" alt="">
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="#">
+              <img class="img-fluid d-block mx-auto" src="img/logos/themeforest.jpg" alt="">
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <a href="#">
+              <img class="img-fluid d-block mx-auto" src="img/logos/creative-market.jpg" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Contacte amb nosaltres</h2>
+            <h3 class="section-subheading text-muted">No dubits a posar-te en contacte amb nosaltres per qualsvol tema</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <form id="contactForm" name="sentMessage" novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input class="form-control" id="name" type="text" placeholder="Nom *" required data-validation-required-message="Introdueix el teu nom">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" id="email" type="email" placeholder="Email *" required data-validation-required-message="Introdueix el teu correu electrònic">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" id="phone" type="tel" placeholder="Telèfon *" required data-validation-required-message="Introdueix el eu número de telèfon.">
+                    <p class="help-block text-danger"></p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <textarea class="form-control" id="message" placeholder="Missatge *" required data-validation-required-message="Introdueix un missatge"></textarea>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-lg-12 text-center">
+                  <div id="success"></div>
+                  <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Enviar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <span class="copyright">Copyright &copy; Pàdel Puig-reig 2018</span>
+          </div>
+          <div class="col-md-4">
+            <ul class="list-inline social-buttons">
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-facebook"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <ul class="list-inline quicklinks">
+              <li class="list-inline-item">
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">Terms of Use</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Portfolio Modals -->
+
+    <!-- Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Project Name</h2>
+                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                  <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
+                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                  <ul class="list-inline">
+                    <li>Date: January 2017</li>
+                    <li>Client: Threads</li>
+                    <li>Category: Illustration</li>
+                  </ul>
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">
+                    <i class="fa fa-times"></i>
+                    Close Project</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- L0gin popup -->
+    <div class="modal fade" id="loginPopup" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="exampleModalLabel">Es necessari iniciar sessió per poder reservar</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <!-- Login form -->
+          <div class="modal-body" v-show="!displaySignUpForm">
+            
+            <div v-show="displayEmailForm" class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-password-sign-in">
+              <form onsubmit="return false;">
+                <div class="firebaseui-card-header">
+                  <h1 class="firebaseui-title">Inicia la sessió</h1>
+                </div>
+                <div class="firebaseui-card-content">
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="email">Adreça electrònica</label>
+                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="email">
+                  </div>
+                  <div class="firebaseui-error-wrapper">
+                    <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
+                  </div>
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="password">Contrasenya</label>
+                    <input type="password" name="password" autocomplete="current-password" class="mdl-textfield__input firebaseui-input firebaseui-id-password" v-model="password">
+                  </div>
+                  <div class="firebaseui-error-wrapper">
+                    <p v-show="errorLabelDisplay()" class="firebaseui-error firebaseui-text-input-error firebaseui-id-password-error">{{ errorMsg }}</p>
+                  </div>
+                </div>
+                <div class="firebaseui-card-actions">
+                  <div class="firebaseui-form-links">
+                    <a v-on:click="passwordRecovery" class="firebaseui-link firebaseui-id-secondary-link" href="javascript:void(0)">No pots iniciar la sessió?</a>
+                  </div>
+                  <div class="firebaseui-form-actions">
+                    <button v-on:click="signIn" type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Inicia la sessió</button>
+                  </div>
+                </div>
+              </form>
+
+              <p id="otherOptionsLabel" class="firebaseui-title"> O si ho prefereixes pots iniciar sessió amb</p>
+
+              <div id="firebaseui-auth-container-popup"></div>
+
+              <div class="firebaseui-card-actions">
+                <div class="firebaseui-form-links">
+                  <a v-on:click="showSignUpForm" id="signUpLink" class="firebaseui-link firebaseui-id-secondary-link" href="javascript:void(0)">No tens compte? Registra't!</a>
+                </div>
+              </div>
+            </div>
+
+            <div v-show="!displayEmailForm" class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-password-recovery">
+              <form onsubmit="return false;">
+                <div class="firebaseui-card-header">
+                  <h1 class="firebaseui-title">Recupera la contrasenya</h1>
+                </div>
+                <div class="firebaseui-card-content">
+                  <p class="firebaseui-text">Rep un correu electrònic amb instruccions per restablir la contrasenya</p>
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="email">Adreça electrònica</label>
+                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="email">
+                  </div>
+                  <div class="firebaseui-error-wrapper">
+                    <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
+                  </div>
+                </div>
+                <div class="firebaseui-card-actions">
+                  <div class="firebaseui-form-actions">
+                    <button v-on:click="cancelPasswordRecovery" class="firebaseui-id-secondary-link firebaseui-button mdl-button mdl-js-button mdl-button--primary" data-upgraded=",MaterialButton">Cancel·lar</button>
+                    <button v-on:click="sendPasswordRecovery" type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Envia</button>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+          <!-- Sign Up -->
+          <div class="modal-body" v-show="displaySignUpForm">
+            <div class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-password-sign-in">
+              <form onsubmit="return false;">
+                <div class="firebaseui-card-header">
+                  <h1 class="firebaseui-title">Regitra't</h1>
+                </div>
+                <div class="firebaseui-card-content">
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="email">Adreça electrònica</label>
+                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="email">
+                  </div>
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="email">Nom i cognoms</label>
+                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="name">
+                  </div>
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="email">Mòbil</label>
+                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="phone">
+                  </div>
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="password">Contrasenya</label>
+                    <input type="password" name="password" autocomplete="current-password" class="mdl-textfield__input firebaseui-input firebaseui-id-password" v-model="password">
+                  </div>
+                  <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
+                    <label class="mdl-textfield__label firebaseui-label" for="password">Repetir contrasenya</label>
+                    <input type="password" name="password" autocomplete="current-password" class="mdl-textfield__input firebaseui-input firebaseui-id-password" v-model="passwordRepeat">
+                  </div>
+                  <div class="firebaseui-error-wrapper">
+                    <p v-show="signUpErrorMsg !== ''" class="firebaseui-error firebaseui-text-input-error firebaseui-id-password-error">{{ signUpErrorMsg }}</p>
+                  </div>
+                </div>
+                <div class="firebaseui-card-actions">
+                  <div class="firebaseui-form-actions">
+                    <button v-on:click="cancelSignUp" class="firebaseui-id-secondary-link firebaseui-button mdl-button mdl-js-button mdl-button--primary" data-upgraded=",MaterialButton">Cancel·lar</button>
+                    <button v-on:click="signUp" type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Crear usuari</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/js/util.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script type="text/javascript" src="vendor/instafeed/instafeed.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+    <script src="js/index.js"></script>
+
+    <!-- Cookies -->
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#f8f9fa"
+        },
+        "button": {
+          "background": "#fed136"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "Aquesta web fa ús de les 'cookies' per oferir una millor experiència i servei. ",
+        "dismiss": "D'acord",
+        "link": "Més informació"
+      }
+    })});
+    </script>
+
+      <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBWHJyCuBJnG_hLK67yBtNKBwQNs_C5iCg",
+        authDomain: "accesscontrol-f2410.firebaseapp.com",
+        databaseURL: "https://accesscontrol-f2410.firebaseio.com",
+        projectId: "accesscontrol-f2410",
+        storageBucket: "accesscontrol-f2410.appspot.com",
+        messagingSenderId: "1080277297588"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script type="text/javascript">
+      var updateInstafeedSize = function(docWidth){
+        $("#instafeed-row").css("height", Math.round(docWidth*0.5));
+      }
+
+      $(window).on('resize', function(){
+            var win = $(this); //this = window
+          updateInstafeedSize(win.width());
+      });
+
+      var win = $(window); 
+      updateInstafeedSize(win.width());
+
+      var feed = new Instafeed({
+          get: 'user',
+          userId: '4190326961',
+          clientId: '4857b8eaaddb4c6e9f6e77aa91fed029',
+          accessToken: '4190326961.1677ed0.4bf71735396e41d489736154938c377c',
+          limit: 6,
+          resolution: 'standard_resolution',//'low_resolution',
+          template: '<li class="instagram-tile"><a class="intagram-link" href="{{link}}" target="_blank"><figure class="instagram-figure"><div class="instagram-wrapper"><img src="{{image}}" /></div></figure></a></li>',
+          after: function(response){
+            
+          },
+          success: function(response) {
+            var index = 0;
+            var num_col = 3;
+            response["data"].forEach(function(img){
+              ++index;
+              if(index%num_col == 0){
+                img["new_line"] = true;
+              }
+              else{
+                img["new_line"] = false;
+              }
+            });
+            console.log(response);
+          }
+      });
+      feed.run();
+  </script>
+
+    <script src="js/auth.js"></script>
+
+  </body>
+
+</html>

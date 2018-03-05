@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pàdel Puig-reig - Reserva</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/reservation.css" rel="stylesheet">
+
+    <!-- Full calendar -->
+    <link rel='stylesheet' href='vendor/fullcalendar/fullcalendar.css' />
+
+  </head>
+
+  <body id="page-top">
+    <div id="app">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark" id="mainNav">
+      <div class="container">
+        <a class="back-arrow" href="./index.html">
+          <i class="material-icons">&#xE314;</i>
+        </a>
+        <a class="js-scroll-trigger logo-padel-link" href="#page-top">
+          <img class="img-logo-padel" src="img/logo_amb_lletres_v3.png" alt="">
+        </a>
+        <a class="account-info-link">
+          <i class="material-icons">&#xE853;</i>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Calendar grid -->
+    <div class="container" id="reservation-container">
+        <div class="row date-selector">
+          <button type="button" id="btn-previous-date" class="col btn-change-date btn btn-secondary" v-on:click="getToPreviousDate" :disabled="!backDateAvailable">&laquo;</button>
+          <label class="col-8" id="current-selected-date-label"> {{ currentSelectedDate }} </label>
+          <button type="button" id="btn-next-date" class="col btn-change-date btn btn-secondary" v-on:click="getToNextDate">&raquo;</button>
+        </div>
+
+        <div id='reservation' role="toolbar">
+ 
+          <button class="btn btn-link collapse-hours-btn" data-toggle="collapse" data-target="#reservation-row1" aria-expanded="true" aria-controls="reservation-row1">
+                Matí
+                <i class="showing-arrow-icon material-icons">&#xE313;</i>
+                <i class="hiding-arrow-icon material-icons">&#xE316;</i>
+              </button>
+
+          <div class="row collapse show row-hour-selection" id="reservation-row1">
+            <div class='col reservation-hour-div' v-bind:class="hour.state" :hourValue="hour.id" v-for="hour in hours" v-if="hour.isMorning" v-on:click="selectHour">
+              <p class='reservation-hour-label'> {{ hour.id }} </p>
+              <p class='reservation-hour-state'> {{ hour.state }} </p>
+              <i class="material-icons state-icon">{{ getIcon(hour) }}</i>
+            </div>
+          </div>
+
+          <!-- Ini Siluetes -->
+          <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-1">
+          <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-2">
+          <!-- Fi Siluetes -->
+
+          <button class="btn btn-link collapse-hours-btn" data-toggle="collapse" data-target="#reservation-row2" aria-expanded="true" aria-controls="reservation-row1">
+                Tarda
+                <i class="showing-arrow-icon material-icons">&#xE313;</i>
+                <i class="hiding-arrow-icon material-icons">&#xE316;</i>
+              </button>
+          <div class="row collapse show row-hour-selection" id="reservation-row2">
+            <div class='col reservation-hour-div' v-bind:class="hour.state" :hourValue="hour.id" v-for="hour in hours" v-if="!hour.isMorning" v-on:click="selectHour">
+              <p class='reservation-hour-label'> {{ hour.id }} </p>
+              <p class='reservation-hour-state'> {{ hour.state }} </p>
+              <i class="material-icons state-icon">{{ getIcon(hour) }}</i>
+            </div>
+          </div>
+
+          <!-- Ini Siluetes row 2 -->
+          <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-3">
+          <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-4">
+          <!-- Fi Siluetes row 2 -->
+
+          <!-- Bottom panel -->
+          <transition name="fade">
+            <div class="bottom-panel fixed-bottom" v-show="showAddReservationPanel()">
+              <div class="row" id="info-selection-label-row"><p class="reservation-summary" v-html="currentSelectedReservation()"></p></div>
+              <div class="row justify-content-md-center" id="reservation-row-btn">
+                <div class="col">
+                  <button type="button" class="btn btn-secondary text-center" :disabled="btnClearReservationState()" v-on:click="clearReservation">Netejar selecció</button>
+                </div>
+                <div class="col">
+                  <button type="button" id="reservation-btn" class="btn btn-success text-center" :disabled="btnAddReservationState()" v-on:click="addNewReservation">Reservar</button>
+                </div>
+              </div>
+            </div>
+          </transition>
+        </div>
+        <div id='calendar' style="display:none"></div>
+    </div>
+
+    <!-- Confirm dialog -->
+    <div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Confirmar reserva</h2>
+                  <p class="item-intro text-muted">Confirma les dades de la reserva</p>
+                  <ul class="list-inline">
+                    <li>Dia: {{ currentSelectedDate }}</li>
+                    <li>Hora inici: {{ hourIniLabel() }} h</li>
+                    <li>Hora fi: {{ hourFiLabel() }} h</li>
+                    <li>Preu: -</li>
+                  </ul>
+                  <button type="button" id="confirm-reservation-btn" class="btn btn-success text-center" v-on:click="confirmNewReservation">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success dialog -->
+    <div class="modal fade" id="successDialog" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Reserva realitzada</h2>
+                  <p class="item-intro text-muted">La reserva s'ha realitzat correctament</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error dialog -->
+    <div class="modal fade" id="errorDialog" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Reserva realitzada</h2>
+                  <p class="item-intro text-muted">La reserva s'ha realitzat correctament</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/moment/moment.js"></script>
+    <script src="vendor/fullcalendar/fullcalendar.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+     <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBWHJyCuBJnG_hLK67yBtNKBwQNs_C5iCg",
+        authDomain: "accesscontrol-f2410.firebaseapp.com",
+        databaseURL: "https://accesscontrol-f2410.firebaseio.com",
+        projectId: "accesscontrol-f2410",
+        storageBucket: "accesscontrol-f2410.appspot.com",
+        messagingSenderId: "1080277297588"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/reservation.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,467 @@
+header.masthead{
+	background-image: none !important;
+	height: 70px !important;
+	background-color: #212529;
+}
+
+html {
+	background-color: rgba(199,199,199,1) !important;
+	/*background: rgba(214,214,214,1) !important;
+	background: -moz-linear-gradient(top, rgba(214,214,214,1) 0%, rgba(207,207,207,1) 47%, rgba(199,199,199,1) 100%) !important;
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(214,214,214,1)), color-stop(47%, rgba(207,207,207,1)), color-stop(100%, rgba(199,199,199,1))) !important;
+	background: -webkit-linear-gradient(top, rgba(214,214,214,1) 0%, rgba(207,207,207,1) 47%, rgba(199,199,199,1) 100%) !important;
+	background: -o-linear-gradient(top, rgba(214,214,214,1) 0%, rgba(207,207,207,1) 47%, rgba(199,199,199,1) 100%) !important;
+	background: -ms-linear-gradient(top, rgba(214,214,214,1) 0%, rgba(207,207,207,1) 47%, rgba(199,199,199,1) 100%) !important;
+	background: linear-gradient(to bottom, rgba(214,214,214,1) 0%, rgba(207,207,207,1) 47%, rgba(199,199,199,1) 100%) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#c7c7c7', GradientType=0 ) !important;*/
+}
+
+.container{
+	padding-top: 30px;
+}
+
+.navbar>.container{
+	padding-top: 22px;
+}
+
+.navbar {
+	background-image: url("../img/clear-dark-bg.jpg");
+	background-repeat: repeat;
+	background-size: 100%;
+}
+
+.back-arrow {
+	height: 100%;
+    position: absolute;
+    color: white !important;
+}
+
+.back-arrow i {
+	margin-top: 50%;
+    font-size: 2.2em;
+}
+
+.logo-padel-link {
+	margin-left: 50px;
+}
+
+.img-logo-padel {
+    height: 36px;
+    margin-bottom: 9px;
+    margin-top: 9px;
+}
+
+.account-info-link{
+	height: 100%;
+    left: 20px;
+}
+
+.account-info-link i{
+    color: white !important;
+}
+
+#reservation {
+	float:left;
+	margin-top: 20px;
+	width: 100%;
+	height: 60px;
+	background-color: none !important;
+}
+
+.collapse-hours-btn{
+	background-image: url("../img/clear-dark-bg.jpg");
+	background-size: 100%;
+	color: white;
+	text-align: left;
+	padding-left: 12px;
+	width: 100%;
+	margin-bottom: 22px;
+	margin-top: 16px;
+}
+
+.showing-arrow-icon, .hiding-arrow-icon {
+	width: 30px;
+    float: right;
+}
+
+.showing-arrow-icon {
+	display: block;
+}
+
+.collapsed .showing-arrow-icon{
+	display: none;
+}
+
+.hiding-arrow-icon{
+	display: none;
+}
+
+.collapsed .hiding-arrow-icon{
+	display: block;
+}
+
+.collapse-hours-btn:hover{
+	color: #f1f8ff !important;
+	text-decoration: none !important;
+}
+
+#reservation-row1 {
+	margin-top: 20px;
+	margin-bottom: 12px;
+}
+
+#reservation-row2 {
+	margin-top: 20px;
+	padding-bottom: 124px;
+}
+
+.collapse.show {
+	display: flex !important;
+}
+
+.btn-change-date {
+	
+}
+
+#current-selected-date-label {
+	text-align: center;
+	margin-bottom: 0px;
+    line-height: 33px;
+}
+
+.reservation-row-wall{
+	display: none;
+}
+
+.available{
+	cursor: pointer;
+	/*background-color: #47ea3e;*/
+
+	-webkit-box-shadow: 0px 0px 24px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 24px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 24px 1px rgba(0,0,0,0.75);
+
+	background: rgba(156,224,67,1);
+	background: -moz-linear-gradient(top, rgba(156,224,67,1) 0%, rgba(86,235,64,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(156,224,67,1)), color-stop(100%, rgba(86,235,64,1)));
+	background: -webkit-linear-gradient(top, rgba(156,224,67,1) 0%, rgba(86,235,64,1) 100%);
+	background: -o-linear-gradient(top, rgba(156,224,67,1) 0%, rgba(86,235,64,1) 100%);
+	background: -ms-linear-gradient(top, rgba(156,224,67,1) 0%, rgba(86,235,64,1) 100%);
+	background: linear-gradient(to bottom, rgba(156,224,67,1) 0%, rgba(86,235,64,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ce043', endColorstr='#56eb40', GradientType=0 );
+}
+
+.unavailable{
+	background-color: #d3d4ef;
+	opacity: 0.4;
+}
+
+.selected{
+	background-color: #e8a200;
+	font-weight: bold;
+}
+
+.selected + div {
+	font-weight: bold;
+}
+
+.partial-unavailable{
+	background-color: rgba(64,216,64,0.4);
+}
+
+.partial-unavailable p, .partial-unavailable + .available p{
+	opacity: 0.4;
+}
+
+.reservation-hour-div{
+	/*width: 2.9%;*/
+	height: 44px;
+	border: 1px solid black;
+	border-right-width: 0px;
+	border-radius: 8px;
+	flex-basis: auto;
+}
+
+.reservation-hour-div:last-child{
+	border-right-width: 1px;
+}
+
+.selected ~ .available{
+	/*border-left-width: 2px;*/
+}
+
+.reservation-row-hours {
+	margin-left: -55px;
+}
+
+.reservation-hour-state {
+	font-style: italic;
+	font-size: 0.4em;
+	display:none;
+}
+
+.row-hour-selection {
+	border-radius: 12px;
+}
+
+.date-selector {
+	border: 1px solid #d3d3d3;
+	border-radius: 8px;
+	
+	background: rgba(245,245,245,1);
+	background: -moz-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(245,245,245,1)), color-stop(25%, rgba(237,237,237,1)), color-stop(53%, rgba(227,227,227,1)), color-stop(100%, rgba(255,255,255,1)));
+	background: -webkit-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: -o-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(to bottom, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#ffffff', GradientType=0 );
+}
+
+.state-icon{
+	border-radius: 12px;
+	pointer-events: none;
+	z-index: 14;
+}
+
+.selected .state-icon {
+	color: #e8a200;
+	background-color: #ffd0a7;
+}
+
+.available .state-icon {
+	color: #66e941;
+	background-color: #befb9f;
+}
+.reservation-summary{
+	pointer-events: none;
+}
+
+.reservation-hour-label{
+	pointer-events: none;
+}
+
+/* Transitions */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+@media (min-width: 1200px) {
+  .reservation-hour-div {
+  	flex-basis: 0;
+  	height: 54px;
+  }
+
+  .reservation-hour-label {
+  	margin-top: -34px;
+    margin-left: -64px;
+  }
+
+  .state-icon {
+  	top: 28%;
+    left: 30%;
+    position: absolute;
+  }
+
+  #mainNav{
+  	padding: 0px !important;
+  }
+
+  #mainNav .container {
+  	padding: 5px;
+  	margin-left: 20px;
+  	margin-right: 20px;
+  }
+
+  #app{
+  	background-color: rgba(199,199,199,1) !important;
+  }
+}
+
+@media (max-width: 1200px) {
+	.collapse-hours-btn{
+		margin-bottom: 0px;
+		margin-top: 0px;
+	}
+
+	#reservation-row1{
+		margin-bottom: 8px;
+	}
+
+	.reservation-hour-label {
+		margin-top: -16px;
+		width: 16%;
+		margin-left: 42%;
+		height: 27px;
+		line-height: 24px !important;
+		padding: 0px;
+		background-color: #E0E0E0;
+		border: 2px solid #202020;
+		border-radius: 12px;
+		z-index: 14;
+	}
+
+	.reservation-hour-div{
+		border-right-width: 1px;
+	}
+
+	.selected + .selected .reservation-hour-label {
+		border-top: 0px solid black;
+    	border-bottom: 0px solid black;
+	    border-radius: 0px;
+	    padding-bottom: 52px;
+	}
+
+	.selected .reservation-hour-label {
+    	border-bottom: 0px solid black;
+	    padding-bottom: 58px;
+	}
+
+	.selected + .available .reservation-hour-label, .selected + .unavailable .reservation-hour-label {
+    	border-top: 0px solid black;
+    	border-top-left-radius: 0px;
+	    border-top-right-radius: 0px;
+	}
+
+	.row-hour-selection {
+		width: 80%;
+		margin-left: 10%;
+	}
+
+	/* Top bar */
+	.navbar {
+		position: fixed;
+		width: 100%;
+	 	top: 0px;
+	    padding-top: 0px;
+	    padding-bottom: 4px;
+	    z-index: 20;
+	}
+
+	.container{
+		padding-top: 0px;
+	}
+
+	.navbar>.container{
+		padding-top: 6px;
+		padding-bottom: 6px;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.date-selector{
+		position: fixed;
+		width: 100%;
+		top: 70px;
+		z-index: 20;
+	}
+
+	/* Reservation div */
+	#reservation{
+		position: absolute;
+		top: 90px;
+		z-index: 10;
+		left: 0px;
+		height: 100%;
+		/*background-image: url("../img/clear-light-bg.jpg");*/
+		background-repeat: repeat;
+		background-size: 100%;
+		/*overflow: auto;*/
+	}
+
+	.reservation-row-wall{
+		display: block;
+		opacity: 0.20;
+		z-index: 12;
+	    position: absolute;
+	    pointer-events: none;
+	}
+
+	#reservation-row-wall-1{
+	    top: 133px;
+	    right: 42px;
+	}
+
+	#reservation-row-wall-2{
+	    top: 464px;
+	    left: 42px;
+	    width: 144px;
+	}
+
+	#reservation-row-wall-3{
+	    top: 1064px;
+	    left: 42px;
+	    width: 144px;
+	}
+
+	#reservation-row-wall-4{
+	    top: 1356px;
+	    right: 42px;
+	    width: 173px;
+	}
+
+	.state-icon{
+		position: absolute;
+		right: 30px;
+		top: 8px;
+	}
+
+	.reservation-summary{
+		pointer-events: none;
+	}
+
+	.reservation-hour-label{
+		pointer-events: none;
+	}
+
+	/* Scroll */
+	#mainNav, #reservation, .date-selector {
+		-webkit-transition-property: top, bottom;
+		-webkit-transition-duration: 0.5s;
+		transition-property: top, bottom;
+		transition-duration: 0.5s;
+	}
+}
+
+.reservation-hour-label {
+	line-height: 40px;
+	text-align: center;
+	font-size: 0.8em;
+}
+
+#reservation-row-btn {
+	
+}
+
+#reservation-btn {
+	/*width: 30%;*/
+}
+
+#info-selection-label-row{
+	margin-bottom: 12px;
+}
+
+.bottom-panel{
+	padding: 12px;
+	text-align: center;
+
+	-webkit-box-shadow: 0px -1px 20px 0px rgba(61,61,61,1);
+	-moz-box-shadow: 0px -1px 20px 0px rgba(61,61,61,1);
+	box-shadow: 0px -1px 20px 0px rgba(61,61,61,1);
+
+	background: rgba(245,245,245,1);
+	background: -moz-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(245,245,245,1)), color-stop(25%, rgba(237,237,237,1)), color-stop(53%, rgba(227,227,227,1)), color-stop(100%, rgba(255,255,255,1)));
+	background: -webkit-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: -o-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(to bottom, rgba(245,245,245,1) 0%, rgba(237,237,237,1) 25%, rgba(227,227,227,1) 53%, rgba(255,255,255,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#ffffff', GradientType=0 );
+}
+
+.bottom-panel p {
+	margin: auto;
+}
