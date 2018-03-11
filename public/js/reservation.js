@@ -202,6 +202,7 @@ var Reservation = new Vue ({
 	el: "#app",
 	data: {
 		hours: hours,
+		currenDate: Utils.getCurrentDate(),
 		currentSelectedDate: Utils.getCurrentDate(),
 		currentSelectedReservation: function() { 
 			return minHour == undefined ? "" : "Reserva dia <b>" + this.currentSelectedDate + "</b> de <b>" + minHour + "</b> a <b>" + Utils.getNextHour(maxHour) + "</b>";
@@ -218,14 +219,32 @@ var Reservation = new Vue ({
 		pathSiluetes: "./img/siluetes/",
 		menImagesLink: ["man/1.png", "man/2.png", "man/3.png"],
 		womenImagesLink: ["woman/1.png", "woman/2.png", "woman/3.png"],
-		arrReservations: arrReservations
+		arrReservations: arrReservations,
+		loading: true
 	},
 	methods: {
 		init: function () {
 		  initScrollEvent();
+		  this.initDatePicker();
 		  this.updateReservations();
 	    },
+	    initDatePicker(){
+	    	var datepicker = $('#datepicker').pickadate({
+	    		min: Utils.stringToDate(this.currentSelectedDate),
+	    		clear: '',
+	    		selectYears: false,
+  				selectMonths: false,
+  				onSet: (event) => {
+  					if ( event.select ) {
+  						this.currentSelectedDate = Utils.dateToString(new Date(event.select));
+  						this.backDateAvailable = !(this.currenDate == this.currentSelectedDate);
+  						this.updateReservations();
+  					}
+  				}
+	    	});
+	    },
 	    updateReservations : function (){
+	    	this.loading = true;
 	    	resetAvailableHours(true);
 			// Get a reference to the database service
 		  var database = firebase.database();
@@ -236,17 +255,18 @@ var Reservation = new Vue ({
 		  var month = arrDate[1];
 		  var year = arrDate[2];
 
-		  var self = this;
-		  database.ref('reservations/' + year + "/" + month + "/" + day).once('value').then(function(snapshot) {
+		  database.ref('reservations/' + year + "/" + month + "/" + day).once('value').then((snapshot) => {
 			  console.log(snapshot.val());
 			  arrReservations = snapshot.val();
 			  if (arrReservations != undefined) {
 			  	setReservations(arrReservations, true);
 			  }
 			  
-			  if(self.dateIndex == 0){
+			  if(this.currenDate == this.currentSelectedDate){
 			  	setUnavailableHousByTime();
 			  }
+			  
+			  this.loading = false;
 			});
 		},
 		selectHour: selectHour,
@@ -259,10 +279,10 @@ var Reservation = new Vue ({
 	    },
 		getToPreviousDate: function(){
 			--this.dateIndex;
-			if(this.dateIndex == 0) this.backDateAvailable = false;
 			this.imagesIndex = (this.imagesIndex-1)%2;
 			this.currentSelectedDate = Utils.decrDate(this.currentSelectedDate);
 			this.updateReservations();
+			if(this.currenDate == this.currentSelectedDate) this.backDateAvailable = false;
 		},
 		getIcon: function(hour) {
 			switch (hour.state) {

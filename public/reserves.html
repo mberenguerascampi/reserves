@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
   <head>
 
@@ -27,8 +27,9 @@
     <link href="css/agency.min.css" rel="stylesheet">
     <link href="css/reservation.css" rel="stylesheet">
 
-    <!-- Full calendar -->
-    <link rel='stylesheet' href='vendor/fullcalendar/fullcalendar.css' />
+    <!-- Date picker -->
+    <link rel='stylesheet' href='vendor/pickadate/themes/default.css' />
+    <link rel='stylesheet' href='vendor/pickadate/themes/default.date.css' />
 
   </head>
 
@@ -54,7 +55,8 @@
     <div class="container" id="reservation-container">
         <div class="row date-selector">
           <button type="button" id="btn-previous-date" class="col btn-change-date btn btn-secondary" v-on:click="getToPreviousDate" :disabled="!backDateAvailable">&laquo;</button>
-          <label class="col-8" id="current-selected-date-label"> {{ currentSelectedDate }} </label>
+          <!-- <label class="col-8 current-selected-date-label" id="current-selected-date-label"> {{ currentSelectedDate }} </label> -->
+          <input id="datepicker" class="col-8 current-selected-date-label" type="text" v-model="currentSelectedDate">
           <button type="button" id="btn-next-date" class="col btn-change-date btn btn-secondary" v-on:click="getToNextDate">&raquo;</button>
         </div>
 
@@ -75,8 +77,10 @@
           </div>
 
           <!-- Ini Siluetes -->
-          <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-1">
-          <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-2">
+          <div class="siluetes_div">
+            <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-1">
+            <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-2">
+          </div>
           <!-- Fi Siluetes -->
 
           <button class="btn btn-link collapse-hours-btn" data-toggle="collapse" data-target="#reservation-row2" aria-expanded="true" aria-controls="reservation-row1">
@@ -93,8 +97,10 @@
           </div>
 
           <!-- Ini Siluetes row 2 -->
-          <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-3">
-          <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-4">
+          <div class="siluetes_div">
+            <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-3">
+            <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-4">
+          </div>
           <!-- Fi Siluetes row 2 -->
 
           <!-- Bottom panel -->
@@ -112,8 +118,15 @@
             </div>
           </transition>
         </div>
-        <div id='calendar' style="display:none"></div>
     </div>
+
+    <!-- Loader -->
+    <transition name="fade">
+      <div class="loader-view" v-show="loading">
+        <img src="./img/logo_amb_lletres.png" class="loading-logo"> 
+        <div class="loader"></div>
+      </div>
+    </transition>
 
     <!-- Confirm dialog -->
     <div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-hidden="true">
@@ -194,15 +207,23 @@
       </div>
     </div>
 
+    <!-- Vue -->
+    <script src="vendor/vue/vue.js"></script>
+
     <!-- Bootstrap core JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/moment/moment.js"></script>
-    <script src="vendor/fullcalendar/fullcalendar.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Date picker -->
+    <script src="vendor/pickadate/picker.js"></script>
+    <script src="vendor/pickadate/picker.date.js"></script>
+    <script src="vendor/pickadate/picker.time.js"></script>
+    <script src="vendor/pickadate/legacy.js"></script>
+    <script src="vendor/pickadate/translations/ca_ES.js"></script>
 
      <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
