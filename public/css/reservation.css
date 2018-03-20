@@ -16,6 +16,29 @@ html {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#c7c7c7', GradientType=0 ) !important;*/
 }
 
+#canvas {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 60;
+}
+
+.help-text{
+	position: fixed;
+	top: 60%;
+	left: 28%;
+	width: 44%;
+	height: 60px;
+	line-height: 60px;
+	border-radius: 12px;
+	background-color: rgba(255,255,255,0.8);
+	font-family: 'Indie Flower', cursive;
+	font-weight: bold;
+	font-size: 1.6em;
+	text-align: center;
+	z-index: 10;
+}
+
 .container{
 	padding-top: 30px;
 }
@@ -53,10 +76,19 @@ html {
 
 .account-info-link{
 	height: 100%;
-    left: 20px;
+    position: absolute;
+    right: 9%;
+    top: calc(50% - 12px);
 }
 
-.account-info-link i{
+.help-link {
+	height: 100%;
+	position: absolute;
+    right: 14%;
+    top: calc(50% - 12px);
+}
+
+.account-info-link i, .help-link i{
     color: white !important;
 }
 
@@ -287,6 +319,11 @@ html {
   animation: spin 2s linear infinite;
 }
 
+/* Help */
+.help .selected {
+	border: 1px solid red;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -307,6 +344,13 @@ html {
   .reservation-hour-label {
   	margin-top: -34px;
     margin-left: -64px;
+  }
+
+  .reservation-hour-last-label {
+    margin-left: 0px;
+    position: absolute;
+    right: 94px;
+    margin-top: -33px;
   }
 
   .state-icon {
@@ -331,9 +375,43 @@ html {
 }
 
 @media (max-width: 1200px) {
+	.help-text{
+		left: 15%;
+		width: 70%;
+		height: 80px;
+		line-height: 40px;
+		font-size: 1.2em;
+	}
+
 	.collapse-hours-btn{
 		margin-bottom: 0px;
 		margin-top: 0px;
+	}
+
+	.reservation-hour-last-div{
+		width: 100%;
+		background-color: transparent;
+		background: transparent;
+		z-index: 30;
+		box-shadow: none;
+	}
+
+	.reservation-hour-last-div .reservation-hour-label {
+		width: calc(16% - 5px);
+	    margin-left: calc(42% + 2.5px);
+	}
+
+	.selected.reservation-hour-last-div .reservation-hour-label {
+		padding: 0px !important;
+		padding-bottom: 0px !important;
+		border-bottom: 2px solid #202020 !important;
+    	border-radius: 12px !important;
+    	border-top: 0px solid black;
+    	border-top-left-radius: 0px !important;
+    	border-top-right-radius: 0px !important;
+    	width: calc(16% - 5px);
+	    margin-left: calc(42% + 2.5px);
+	    padding-top: 2px;
 	}
 
 	#reservation-row1{
@@ -401,6 +479,15 @@ html {
 		padding-right: 0px;
 	}
 
+	.account-info-link{
+	    right: 7%;
+	}
+
+	.help-link {
+	    right: 18%;
+	}
+
+
 	.date-selector{
 		position: fixed;
 		width: 100%;
@@ -432,6 +519,7 @@ html {
 	#reservation-row-wall-1{
 	    top: 133px;
 	    right: 42px;
+	    width: 156px;
 	}
 
 	#reservation-row-wall-2{
@@ -441,15 +529,21 @@ html {
 	}
 
 	#reservation-row-wall-3{
-	    top: 1064px;
+	    top: 133px;
 	    left: 42px;
 	    width: 144px;
+	    transition: all 0.5s ease 0s;
 	}
 
 	#reservation-row-wall-4{
-	    top: 1356px;
+	    top: 464px;
 	    right: 42px;
-	    width: 173px;
+	    width: 144px;
+	    transition: all 0.5s ease 0s;
+	}
+
+	.row-hour-selection {
+		transition: all 0.5s ease 0s;
 	}
 
 	.siluetes_div {
@@ -458,6 +552,14 @@ html {
 
 	.show + .siluetes_div {
 		display: block;
+	}
+
+	.show + .siluetes_div + .collapse-hours-btn + .show + .siluetes_div #reservation-row-wall-3, .collapsing + .siluetes_div + .collapse-hours-btn + .show + .siluetes_div #reservation-row-wall-3{
+	    top: 1064px;
+	}
+
+	.show + .siluetes_div + .collapse-hours-btn + .show + .siluetes_div #reservation-row-wall-4, .collapsing + .siluetes_div + .collapse-hours-btn + .show + .siluetes_div #reservation-row-wall-4{
+	    top: 1356px;
 	}
 
 	.state-icon{

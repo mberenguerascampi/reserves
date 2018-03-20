@@ -216,19 +216,107 @@ var Reservation = new Vue ({
 		dateIndex: 0,
 		backDateAvailable: false,
 		imagesIndex: 0,
+		imagesLength: 5,
 		pathSiluetes: "./img/siluetes/",
-		menImagesLink: ["man/1.png", "man/2.png", "man/3.png"],
-		womenImagesLink: ["woman/1.png", "woman/2.png", "woman/3.png"],
+		user: {cupons:[]},
 		arrReservations: arrReservations,
-		loading: true
+		loading: true,
+		helpText: "",
+		helpDrawed: false,
 	},
 	methods: {
 		init: function () {
 		  initScrollEvent();
 		  this.initDatePicker();
+		  this.loadUserData();
 		  this.updateReservations();
 	    },
-	    initDatePicker(){
+	    getSilueta: function(isMan, isFirstRow){
+	    	var path = this.pathSiluetes;
+	    	path += isMan ? "man/" : "woman/";
+	    	path += isFirstRow ? String(this.imagesIndex) : String(this.imagesIndex+1);
+	    	path += ".png";
+
+	    	return path;
+	    },
+	    getCanvas: function(){
+	    	var canvas = document.getElementById('canvas');
+	    	canvas.width = this.getScreenWidth();
+	    	canvas.height = this.getScreenHeight();
+	    	return canvas;
+	    },
+	    clearCanvas: function(){
+	    	var canvas = document.getElementById('canvas');
+			var context = canvas.getContext('2d');
+			context.clearRect(0, 0, canvas.width, canvas.height);
+	    },
+	    getScreenWidth: function(){
+	    	return window.innerWidth;
+	    },
+	    getScreenHeight: function(){
+	    	return window.innerHeight;
+	    },
+	    showHelp: function() {
+	    	$("#canvas-container").show();
+	    	this.drawHelp();
+	    },
+	    drawHelp: function(){
+	    	this.helpText = "Utilitza les fletxes per canviar de dia";
+
+	    	var width = this.getScreenWidth();
+	    	var height = this.getScreenHeight();
+	    	var prevDate = $("#btn-previous-date").offset();
+	    	var nextDate = $("#btn-next-date").offset();
+	    	var btnWidth = $("#btn-next-date").width();
+	    	var btnHeight = $("#btn-next-date").height();
+	    	var origin1 = prevDate.left+btnWidth/2;
+	    	var origin2 = nextDate.left+btnWidth/2;
+
+	    	const rc = rough.canvas(this.getCanvas());
+	    	rc.ellipse(origin1+10, prevDate.top+btnHeight/2 + 5, btnWidth+15, btnHeight+5); // centerX, centerY, diameter
+			rc.ellipse(origin2+10, nextDate.top+btnHeight/2 + 5, btnWidth+15, btnHeight+5); // centerX, centerY, width, height
+			rc.line(origin1, prevDate.top+btnHeight, width/2 - 5, height*0.6); // x1, y1, x2, y2
+			rc.line(origin2, nextDate.top+btnHeight, width/2 + 5, height*0.6); // x1, y1, x2, y2
+
+			setTimeout(() => {
+				this.clearCanvas();
+				this.drawHelp2();
+			}, 4500);
+	    },
+	    drawHelp2: function(){
+	    	this.helpText = "o bé obre el calendari prément sobre la data";
+
+	    	var position = $("#datepicker").offset();
+	    	var width = $("#datepicker").width();
+	    	var height = $("#datepicker").height();
+
+	    	const rc = rough.canvas(this.getCanvas());
+	    	rc.ellipse(position.left + width/2 + 10, position.top + height/2, 120, 40); // centerX, centerY, diameter
+			rc.line(position.left + width/2 + 10, position.top + height, position.left + width/2 + 10, this.getScreenHeight()*0.6); // x1, y1, x2, y2
+
+			setTimeout(() => {
+				this.clearCanvas();
+				$("#canvas-container").hide();
+			}, 4500);
+	    },
+	    drawAddHelp: function(){
+	    	this.helpText = "Si vols pots afegir mitja hora més a la teva reserva";
+
+	    	var position = $(".available").offset();
+	    	var width = $(".available").width();
+	    	var height = $(".available").height();
+
+	    	$("#canvas-container").show();
+	    	const rc = rough.canvas(this.getCanvas());
+	    	rc.ellipse(position.left + width/2 + 10, position.top + height/2, 120, 40); // centerX, centerY, diameter
+			rc.line(position.left + width/2 + 10, position.top + height, position.left + width/2, position.top + height + 100); // x1, y1, x2, y2
+
+			setTimeout(() => {
+				this.clearCanvas();
+				$("#canvas-container").hide();
+			}, 4500);
+	    },
+	    initDatePicker: function(){
 	    	var datepicker = $('#datepicker').pickadate({
 	    		min: Utils.stringToDate(this.currentSelectedDate),
 	    		clear: '',
@@ -267,19 +355,38 @@ var Reservation = new Vue ({
 			  }
 			  
 			  this.loading = false;
+			  if (!this.helpDrawed){
+			  	this.drawHelp();
+			  	this.helpDrawed = true;
+			  }
 			});
 		},
-		selectHour: selectHour,
+		loadUserData: function () {
+			firebase.auth().onAuthStateChanged((user) => {
+      			if (user) {
+      				firebase.database().ref('users/' + user.uid).once('value').then((snapshot) => {
+					  console.log(snapshot.val());
+					  this.user = snapshot.val();
+					});
+      			}
+      		});
+		},
+		selectHour: function(event) {
+			selectHour(event);
+			setTimeout(() => {
+				this.drawAddHelp();
+			}, 200);
+		},
 		getToNextDate:function () {
 		  this.backDateAvailable = true;
 		  ++this.dateIndex;
-		  this.imagesIndex = (this.imagesIndex+1)%2;
+		  this.imagesIndex = (this.imagesIndex+1)%this.imagesLength;
 	      this.currentSelectedDate = Utils.incrDate(this.currentSelectedDate);
 		  this.updateReservations();
 	    },
 		getToPreviousDate: function(){
 			--this.dateIndex;
-			this.imagesIndex = (this.imagesIndex-1)%2;
+			this.imagesIndex = (this.imagesIndex-1)%this.imagesLength;
 			this.currentSelectedDate = Utils.decrDate(this.currentSelectedDate);
 			this.updateReservations();
 			if(this.currenDate == this.currentSelectedDate) this.backDateAvailable = false;
@@ -313,6 +420,12 @@ var Reservation = new Vue ({
 		},
 		addNewReservation: function(){
 			$('#confirmDialog').modal('show');
+		},
+		showProfileDialog: function(){
+			$('#profileDialog').modal('show');
+		},
+		changeEmail: function() {
+
 		},
 		confirmNewReservation: function(){
 			var self = this;

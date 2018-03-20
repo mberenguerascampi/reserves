@@ -21,6 +21,7 @@
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -45,7 +46,10 @@
         <a class="js-scroll-trigger logo-padel-link" href="#page-top">
           <img class="img-logo-padel" src="img/logo_amb_lletres_v3.png" alt="">
         </a>
-        <a class="account-info-link">
+        <a class="help-link" v-on:click="showHelp">
+          <i class="material-icons">&#xE887;</i>
+        </a>
+        <a class="account-info-link" v-on:click="showProfileDialog">
           <i class="material-icons">&#xE853;</i>
         </a>
       </div>
@@ -78,8 +82,8 @@
 
           <!-- Ini Siluetes -->
           <div class="siluetes_div">
-            <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-1">
-            <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-2">
+            <img v-bind:src="getSilueta(false, true)" class="reservation-row-wall" id="reservation-row-wall-1">
+            <img v-bind:src="getSilueta(true, true)" class="reservation-row-wall" id="reservation-row-wall-2">
           </div>
           <!-- Fi Siluetes -->
 
@@ -94,12 +98,15 @@
               <p class='reservation-hour-state'> {{ hour.state }} </p>
               <i class="material-icons state-icon">{{ getIcon(hour) }}</i>
             </div>
+            <div v-bind:class="hours['23:30'].state" class="reservation-hour-last-div">
+              <p class='reservation-hour-label reservation-hour-last-label'> 24:00 </p>
+            </div>
           </div>
 
           <!-- Ini Siluetes row 2 -->
           <div class="siluetes_div">
-            <img v-bind:src="pathSiluetes + menImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-3">
-            <img v-bind:src="pathSiluetes + womenImagesLink[imagesIndex]" class="reservation-row-wall" id="reservation-row-wall-4">
+            <img v-bind:src="getSilueta(true, false)" class="reservation-row-wall" id="reservation-row-wall-3">
+            <img v-bind:src="getSilueta(false, false)" class="reservation-row-wall" id="reservation-row-wall-4">
           </div>
           <!-- Fi Siluetes row 2 -->
 
@@ -151,6 +158,40 @@
                     <li>Preu: -</li>
                   </ul>
                   <button type="button" id="confirm-reservation-btn" class="btn btn-success text-center" v-on:click="confirmNewReservation">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="canvas-container">
+      <canvas id="canvas" width="375" height="812"></canvas>
+      <p class="help-text"> {{ helpText }} </p>
+    </div>
+
+    <!-- Profile dialog -->
+    <div class="modal fade" id="profileDialog" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Perfil</h2>
+                  <p class="item-intro text-muted">Aquestes són les teves dades</p>
+                  <ul class="list-inline">
+                    <li>Email: {{ user.email }}</li>
+                    <li>Cupons: {{ user.cupons.length }}</li>
+                  </ul>
+                  <button type="button" id="confirm-reservation-btn" class="btn btn-success text-center" v-on:click="changeEmail">Modificar email</button>
                 </div>
               </div>
             </div>
@@ -224,6 +265,8 @@
     <script src="vendor/pickadate/picker.time.js"></script>
     <script src="vendor/pickadate/legacy.js"></script>
     <script src="vendor/pickadate/translations/ca_ES.js"></script>
+
+    <script src="vendor/rough/rough.js"></script>
 
      <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
