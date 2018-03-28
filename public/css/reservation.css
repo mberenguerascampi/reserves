@@ -16,6 +16,14 @@ html {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#c7c7c7', GradientType=0 ) !important;*/
 }
 
+#canvas-container {
+	/*position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;*/
+}
+
 #canvas {
 	position: fixed;
 	top: 0px;
@@ -39,6 +47,14 @@ html {
 	z-index: 10;
 }
 
+.help-text-top {
+	top: 15%;
+}
+
+.help-text-bottom {
+	top: 90%;
+}
+
 .container{
 	padding-top: 30px;
 }
@@ -52,6 +68,42 @@ html {
 	background-repeat: repeat;
 	background-size: 100%;
 }
+
+/* Dialogs */
+
+.modal-content .container{
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+.modal-content button {
+	margin-top: 10px;
+    width: 190px;
+    margin-left: calc(50% - 95px);
+}
+
+.modal-content h1, .modal-content h2 {
+	text-align: center;
+}
+
+.modal-content ul li {
+	margin: 4px;
+}
+
+.modal-content .list-key {
+	font-weight: bold;
+}
+
+.modal-content .list-value-undefined {
+	font-style: italic;
+	color: #a5a3a3;
+	font-size: 0.9em;
+}
+
+.modal-content .cupons-list {
+	margin-left: 16px;
+}
+
 
 .back-arrow {
 	height: 100%;
@@ -347,10 +399,9 @@ html {
   }
 
   .reservation-hour-last-label {
-    margin-left: 0px;
-    position: absolute;
-    right: 94px;
-    margin-top: -33px;
+	margin-left: -23px;
+	position: absolute;
+	margin-top: -33px;
   }
 
   .state-icon {
@@ -381,6 +432,10 @@ html {
 		height: 80px;
 		line-height: 40px;
 		font-size: 1.2em;
+	}
+
+	.help-text-top {
+
 	}
 
 	.collapse-hours-btn{

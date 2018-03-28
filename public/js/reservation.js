@@ -7,6 +7,7 @@ const STATES = {
 
 const BASE_URL = "https://us-central1-accesscontrol-f2410.cloudfunctions.net/";
 const ADD_RESERVATION_URL = BASE_URL + "addReservation";
+const EDIT_USER_URL = BASE_URL + "editUser";
 
 var minHour;
 var maxHour;
@@ -127,6 +128,13 @@ var selectHour = function (event){
 	}
 
 	updateAvailableHours();
+
+	if(!Reservation.addHelpDrawed){
+		Reservation.addHelpDrawed = true;
+		setTimeout(() => {
+				Reservation.drawAddHelp();
+		}, 200);
+	}
 }
 
 var setOneReservation = function (res) {
@@ -223,6 +231,8 @@ var Reservation = new Vue ({
 		loading: true,
 		helpText: "",
 		helpDrawed: false,
+		addHelpDrawed: false,
+		editingUserData: false
 	},
 	methods: {
 		init: function () {
@@ -258,9 +268,15 @@ var Reservation = new Vue ({
 	    },
 	    showHelp: function() {
 	    	$("#canvas-container").show();
-	    	this.drawHelp();
+	    	if (this.isAnyHourSelected()){
+	    		this.drawAddHelp();
+	    	}
+	    	else {
+	    		this.drawHelp();
+	    	}
 	    },
 	    drawHelp: function(){
+	    	this.switchHtmlOverflow(false);
 	    	this.helpText = "Utilitza les fletxes per canviar de dia";
 
 	    	var width = this.getScreenWidth();
@@ -281,7 +297,7 @@ var Reservation = new Vue ({
 			setTimeout(() => {
 				this.clearCanvas();
 				this.drawHelp2();
-			}, 4500);
+			}, 4000);
 	    },
 	    drawHelp2: function(){
 	    	this.helpText = "o bé obre el calendari prément sobre la data";
@@ -296,25 +312,51 @@ var Reservation = new Vue ({
 
 			setTimeout(() => {
 				this.clearCanvas();
+				this.switchHtmlOverflow(true);
 				$("#canvas-container").hide();
-			}, 4500);
+			}, 4000);
 	    },
 	    drawAddHelp: function(){
+	    	this.switchHtmlOverflow(false);
 	    	this.helpText = "Si vols pots afegir mitja hora més a la teva reserva";
 
 	    	var position = $(".available").offset();
 	    	var width = $(".available").width();
 	    	var height = $(".available").height();
+	    	var screenHeight = this.getScreenHeight();
+	    	var screenWidth = this.getScreenWidth();
 
 	    	$("#canvas-container").show();
 	    	const rc = rough.canvas(this.getCanvas());
-	    	rc.ellipse(position.left + width/2 + 10, position.top + height/2, 120, 40); // centerX, centerY, diameter
-			rc.line(position.left + width/2 + 10, position.top + height, position.left + width/2, position.top + height + 100); // x1, y1, x2, y2
+
+	    	if (screenWidth < 1200) {
+	    		rc.ellipse(position.left + width/2 + 10, position.top + height/2, 320, 40); // centerX, centerY, diameter
+	    	}
+	    	else {
+	    		rc.ellipse(position.left + width/2 + 10, position.top + height/2, 120, 40); // centerX, centerY, diameter
+	    	}
+			
+
+	    	$(".help-text").removeClass("help-text-top");
+			if (position.top > screenHeight/2){
+	    		$(".help-text").addClass("help-text-top");
+	    		rc.line(position.left + width/2 + 10, position.top, screenWidth/2, screenHeight*0.15 + 80); // x1, y1, x2, y2
+	    	} 
+	    	else {
+	    		rc.line(position.left + width/2 + 10, position.top + height, screenWidth/2, screenHeight*0.6); // x1, y1, x2, y2
+	    	}
 
 			setTimeout(() => {
 				this.clearCanvas();
+				this.switchHtmlOverflow(true);
 				$("#canvas-container").hide();
-			}, 4500);
+			}, 3500);
+	    },
+	    switchHtmlOverflow: function(enable){
+	    	if (this.getScreenWidth < 1200) { //Només s'aplica en mobile
+		    	var overflow = enable ? "inherit" : "hidden";
+		    	$("html").css("overflow", overflow);
+	    	}
 	    },
 	    initDatePicker: function(){
 	    	var datepicker = $('#datepicker').pickadate({
@@ -373,9 +415,6 @@ var Reservation = new Vue ({
 		},
 		selectHour: function(event) {
 			selectHour(event);
-			setTimeout(() => {
-				this.drawAddHelp();
-			}, 200);
 		},
 		getToNextDate:function () {
 		  this.backDateAvailable = true;
@@ -406,6 +445,9 @@ var Reservation = new Vue ({
 					return "";
 			}
 		},
+		isAnyHourSelected: function() {
+			return (minHour != undefined);
+		},
 		showAddReservationPanel: function() {
 			return (maxHour !== undefined || minHour !== undefined);
 		},
@@ -424,8 +466,29 @@ var Reservation = new Vue ({
 		showProfileDialog: function(){
 			$('#profileDialog').modal('show');
 		},
-		changeEmail: function() {
-
+		changeUserData: function() {
+			this.editingUserData = true;
+		},
+		confirmNewUserData: function() {
+			this.editingUserData = false;
+			firebase.auth().currentUser.getIdToken(true).then((idToken) => {
+			  	// Send token to your backend via HTTPS
+				$.ajax({
+				  type: "POST",
+				  url: EDIT_USER_URL,
+				  headers: {"Authorization" : "Bearer " + idToken},
+				  data: this.user,
+				  success: function(res) {
+				  	console.log(res)
+				  },
+				  error: function(err) {
+				  	console.log(err)
+				  },
+				  dataType: "application/json"
+				});
+			}).catch(function(error) {
+			  // Handle error
+			});
 		},
 		confirmNewReservation: function(){
 			var self = this;
