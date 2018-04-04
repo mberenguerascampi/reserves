@@ -319,10 +319,10 @@
           <div class="col-md-4">
             <ul class="list-inline quicklinks">
               <li class="list-inline-item">
-                <a href="#">Política de privacitat</a>
+                <a data-toggle="modal" href="#privacy">Política de privacitat</a>
               </li>
               <li class="list-inline-item">
-                <a href="#">Termes i condicions</a>
+                <a data-toggle="modal" href="#terms_and_conditions">Termes i condicions</a>
               </li>
             </ul>
           </div>
@@ -332,8 +332,8 @@
 
     <!-- Portfolio Modals -->
 
-    <!-- Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Termes i condicions -->
+    <div class="conditions-modal modal fade" id="terms_and_conditions" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="close-modal" data-dismiss="modal">
@@ -343,21 +343,79 @@
           </div>
           <div class="container">
             <div class="row">
-              <div class="col-lg-8 mx-auto">
+              <div class="col-lg-10 mx-auto">
                 <div class="modal-body">
                   <!-- Project Details Go Here -->
-                  <h2 class="text-uppercase">Project Name</h2>
-                  <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                  <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
-                  <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                  <ul class="list-inline">
-                    <li>Date: January 2017</li>
-                    <li>Client: Threads</li>
-                    <li>Category: Illustration</li>
-                  </ul>
-                  <button class="btn btn-primary" data-dismiss="modal" type="button">
-                    <i class="fa fa-times"></i>
-                    Close Project</button>
+                  <h2 class="text-uppercase">Termes i condicions</h2>
+                  <p class="item-intro text-muted">Aquesta pàgina web ha estat creada per Pàdel Puig-reig. El fet d'accedir a aquesta pàgina implica el coneixement i l'acceptació dels següents termes i condicions:
+                    <br>
+                    <br>
+                    <span class="bold-text">1.</span> Pàdel Puig-reig és el proietari intel·lectual de la web. Tots els drets del contingut d’aquesta pàgina web i del seu disseny gràfic són propietat exclusiva de Pàdel Puig-reig i és a qui li correspon l’exercici exclusiu dels drets d’explotació dels mateixos.
+                    <br>
+                    <br>
+                    <span class="bold-text">2.</span> Pàdel Puig-reig no es responsabilitza del mal ús que es realitzi dels continguts de la seva pàgina web, sent exclusiva responsabilitat de la persona que hi accedeix a ells o els utilitza. Tampoc assumeix cap responsabilitat per la informació continguda en les pàgines web de tercers a les que es pugui accedir per enllaços des de la pàgina www.padelpuigreig.com
+                    <br>
+                    <br>
+                    <span class="bold-text">3.</span> Pàdel Puig-reig es reserva el dret d’actualitzar, modificar o eliminar la informació continguda en la seva pàgina web, i la seva configuració o presentació, en qualsevol moment, sense previ avis i sense assumir cap responsabilitat per fer-ho.
+                    <br>
+                    <br>
+                    <span class="bold-text">4.</span> Pàdel Puig-reig no assumeix cap responsabilitat que es pugui derivar de problemes tècnics o errades en equips informàtics aliens, així com de problemes en la xarxa d'Internet.
+                    <br>
+                    <br>
+                    <span class="bold-text">5.</span> Pàdel Puig-reig es compromet a no distribuïr les dades facilitades pels usuaris a una tercera persona física o jurídica.
+                    <br>
+                    <br>
+                    <span class="bold-text">6.</span> Amb caràcter general, les relacions amb els usuaris, que es derivin de la prestació dels serveis continguts en aquesta pàgina web, estan sotmesos a la legislació i jurisdicció espanyola.
+                    <br>
+                    <br>
+                    Els usuaris d’aquesta pàgina web són conscients de tot l’exposat i ho accepten voluntàriament.</p>
+                  <button class="btn btn-primary col-lg mx-auto btn-sx" data-dismiss="modal" type="button">Acceptar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacitat -->
+    <div class="conditions-modal modal fade" id="privacy" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-10 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Política de privacitat</h2>
+                  <p class="item-intro text-muted">
+                    Pàdel Puig-reig manifesta el seu respecte i compliment de les disposicions recollides en la Llei Orgànica 15/1999, de 13 de desembre, de Protecció de Dades de Caràcter Personal. Per això, l'informa de la seva política de protecció de dades perquè vostè determini voluntàriament si desitja facilitar les seves dades personals a Pàdel Puig-reig.
+                    <br>
+                    <br>
+                    Pàdel Puig-reig l'informa que les seves dades personals introduïdes a través de la pàgina present pàgina web (en endavant, el Portal), així com els que pogués facilitar en el futur en el marc de la seva relació amb aquesta entitat, seran recollits en fitxers titularitat de Pàdel Puig-reig, que serà també la destinatària de les dades. Aquests fitxers tenen la finalitat de gestionar, administrar i prestar-li els serveis o productes que sol·liciti o contracti a través del Portal de Pàdel Puig-reig, facilitar el compliment i execució dels serveis que pogués sol·licitar, conèixer millor els seus gustos i opinions respecte als serveis de Pàdel Puig-reig i adequar-los a les seves preferències, així com poder oferir nous serveis i enviar-li informació comercial relacionada amb les novetats i promocions de Pàdel Puig-reig.
+                    Excepte en els camps en què expressament es determine el contrari, les respostes a les preguntes sobre dades personals són voluntàries, sense que la falta de contestació a aquestes preguntes impliqui una minva en la qualitat dels serveis que vostè sol·licita. La manca d'emplenament dels camps determinats com obligatoris o el subministrament de dades incorrectes impossibilitarà que Pàdel Puig-reig pugui prestar-li els serveis que sol·liciti.
+                    Així mateix, en la recerca de total transparència en la seva relació amb l'usuari, Pàdel Puig-reig l'informa de la utilització en aquest Portal d'altres mecanismes informàtics relacionats amb les dades personals, com són galetes i logs.
+                    Els logs són uns arxius emmagatzemats al servidor de Pàdel Puig-reig que registren dades sobre la seva navegació i que tenen per finalitat principal reunir informació sobre les operacions realitzades per vostè. També ens permeten seguir prestant els serveis que heu demanat, conèixer millor les seves preferències i oferir-li altres serveis que puguin adequar als seus gustos. Així mateix, ens ajuden a analitzar el funcionament del sistema, localitzar les incidències i problemes que puguin sorgir i solucionar en el menor termini possible.
+                    <br>
+                    <br>
+                    Vostè tindrà la possibilitat d'exercir els drets d'accés, rectificació, cancel·lació i oposició de les seves dades personals que obren en els fitxers de Pàdel Puig-reig, sol·licitant en els termes legalment establerts per qualsevol mitjà que deixi constància del seu enviament i de la seva recepció. Per exercir els seus drets, podrà dirigir-se per escrit a la direcció de Pàdel Puig-reig o al correu electrònic indicats a l'inici de la present Política de Privacitat
+                    Pàdel Puig-reig manté els nivells de protecció de les seves dades personals conforme al Reial decret 1720/2007, i ha establert tots els mitjans tècnics al seu abast per evitar la pèrdua, mal ús, alteració, accés no autoritzat i robatori de les dades que vostè faciliti a Pàdel Puig-reig, sense perjudici que les mesures de seguretat a Internet no siguin inexpugnables.
+                    <br>
+                    <br>
+                    Pàdel Puig-reig es reserva la facultat de modificar aquesta Política de Privacitat per adaptar-la a les novetats legislatives, jurisprudencials o d'interpretació de l'Agència de Protecció de Dades.
+                    <br>
+                    <br>
+                    La present Política de Privacitat podrà ser complementada per qualssevol altres clàusules o condicions generals d'accés a determinats serveis, en cas que aquest accés suposi alguna especialitat en matèria de protecció de dades de caràcter personal.
+                    <br>
+                    <br>
+                    En tot cas, aquestes especialitats no són aplicables a les seves dades personals en tant no accepti les esmentades clàusules o mencions.
+                  </p>
+                  <button class="btn btn-primary col-lg mx-auto btn-sx" data-dismiss="modal" type="button">Acceptar</button>
                 </div>
               </div>
             </div>
@@ -372,7 +430,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h6 class="modal-title" id="exampleModalLabel">Es necessari iniciar sessió per poder reservar</h6>
+            <h6 class="modal-title" id="login-title">{{ loginTitle }}</h6>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -383,16 +441,10 @@
             
             <div v-show="displayEmailForm" class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-password-sign-in">
               <form onsubmit="return false;">
-                <div class="firebaseui-card-header">
-                  <h1 class="firebaseui-title">Inicia la sessió</h1>
-                </div>
-                <div class="firebaseui-card-content">
+                <div class="firebaseui-card-content firebase-email-card">
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
                     <label class="mdl-textfield__label firebaseui-label" for="email">Adreça electrònica</label>
                     <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="email">
-                  </div>
-                  <div class="firebaseui-error-wrapper">
-                    <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
                   </div>
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
                     <label class="mdl-textfield__label firebaseui-label" for="password">Contrasenya</label>
@@ -404,7 +456,7 @@
                 </div>
                 <div class="firebaseui-card-actions">
                   <div class="firebaseui-form-links">
-                    <a v-on:click="passwordRecovery" class="firebaseui-link firebaseui-id-secondary-link" href="javascript:void(0)">No pots iniciar la sessió?</a>
+                    <a v-on:click="passwordRecovery" class="firebaseui-link firebaseui-id-secondary-link firebase-forget-password" href="javascript:void(0)">Has perdut la contrasenya?</a>
                   </div>
                   <div class="firebaseui-form-actions">
                     <button v-on:click="signIn" type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Inicia la sessió</button>
@@ -412,22 +464,19 @@
                 </div>
               </form>
 
-              <p id="otherOptionsLabel" class="firebaseui-title"> O si ho prefereixes pots iniciar sessió amb</p>
-
-              <div id="firebaseui-auth-container-popup"></div>
-
-              <div class="firebaseui-card-actions">
+              <div class="firebaseui-card-actions firebaseui-card-actions-signup">
                 <div class="firebaseui-form-links">
                   <a v-on:click="showSignUpForm" id="signUpLink" class="firebaseui-link firebaseui-id-secondary-link" href="javascript:void(0)">No tens compte? Registra't!</a>
                 </div>
               </div>
+
+              <p id="otherOptionsLabel" class="firebaseui-title"> O si ho prefereixes pots iniciar sessió amb</p>
+
+              <div id="firebaseui-auth-container-popup"></div>
             </div>
 
             <div v-show="!displayEmailForm" class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-password-recovery">
               <form onsubmit="return false;">
-                <div class="firebaseui-card-header">
-                  <h1 class="firebaseui-title">Recupera la contrasenya</h1>
-                </div>
                 <div class="firebaseui-card-content">
                   <p class="firebaseui-text">Rep un correu electrònic amb instruccions per restablir la contrasenya</p>
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
@@ -453,29 +502,26 @@
           <div class="modal-body" v-show="displaySignUpForm">
             <div class="mdl-card mdl-shadow--2dp firebaseui-container firebaseui-id-page-password-sign-in">
               <form onsubmit="return false;">
-                <div class="firebaseui-card-header">
-                  <h1 class="firebaseui-title">Regitra't</h1>
-                </div>
-                <div class="firebaseui-card-content">
+                <div class="firebaseui-card-content firebase-email-card">
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
                     <label class="mdl-textfield__label firebaseui-label" for="email">Adreça electrònica</label>
-                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="email">
+                    <input type="email" name="email" autocomplete="email" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="email">
                   </div>
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
-                    <label class="mdl-textfield__label firebaseui-label" for="email">Nom i cognoms</label>
-                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="name">
+                    <label class="mdl-textfield__label firebaseui-label" for="username">Nom i cognoms</label>
+                    <input type="text" name="username" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="name">
                   </div>
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
-                    <label class="mdl-textfield__label firebaseui-label" for="email">Mòbil</label>
-                    <input type="email" name="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="phone">
+                    <label class="mdl-textfield__label firebaseui-label" for="phone">Mòbil</label>
+                    <input type="number" name="phone" autocomplete="phone" class="mdl-textfield__input firebaseui-input firebaseui-id-email" v-model="phone">
                   </div>
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
                     <label class="mdl-textfield__label firebaseui-label" for="password">Contrasenya</label>
                     <input type="password" name="password" autocomplete="current-password" class="mdl-textfield__input firebaseui-input firebaseui-id-password" v-model="password">
                   </div>
                   <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty is-upgraded" data-upgraded=",MaterialTextfield">
-                    <label class="mdl-textfield__label firebaseui-label" for="password">Repetir contrasenya</label>
-                    <input type="password" name="password" autocomplete="current-password" class="mdl-textfield__input firebaseui-input firebaseui-id-password" v-model="passwordRepeat">
+                    <label class="mdl-textfield__label firebaseui-label" for="password-repeat">Repetir contrasenya</label>
+                    <input type="password" name="password-repeat" autocomplete="current-password" class="mdl-textfield__input firebaseui-input firebaseui-id-password" v-model="passwordRepeat">
                   </div>
                   <div class="firebaseui-error-wrapper">
                     <p v-show="signUpErrorMsg !== ''" class="firebaseui-error firebaseui-text-input-error firebaseui-id-password-error">{{ signUpErrorMsg }}</p>

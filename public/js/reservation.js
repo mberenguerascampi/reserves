@@ -129,12 +129,13 @@ var selectHour = function (event){
 
 	updateAvailableHours();
 
-	if(!Reservation.addHelpDrawed){
+	//Descomentar si es vol que es mostri l'ajuda al principi
+	/*if(!Reservation.addHelpDrawed){
 		Reservation.addHelpDrawed = true;
 		setTimeout(() => {
 				Reservation.drawAddHelp();
 		}, 200);
-	}
+	}*/
 }
 
 var setOneReservation = function (res) {
@@ -168,6 +169,36 @@ var setUnavailableHousByTime = function () {
 			setAvailable(hour, false);
 		}
 	};
+}
+
+var setHoursResourceSettings = function (lightLimit, defaultPrice, isHalfHourType) {
+	var lightsOn = false;
+	for (var hour in hours) {
+		if(hour === lightLimit) {
+			lightsOn = true;
+		}
+		hours[hour].price = isHalfHourType ? defaultPrice/2 : defaultPrice;
+		hours[hour].lightsOn = lightsOn;
+	};
+}
+
+var setBetweenRule = function(rule, isHalfHourType) {
+	var currentHour = rule.hourIni;
+	while (currentHour !== rule.hourFi) {
+		hours[currentHour].price = isHalfHourType ? rule.price/2 : rule.price;
+		currentHour = Utils.getNextHour(currentHour);
+	}
+}
+
+var setPriceRules = function (rules, isHalfHourType) {
+	for (var key in rules) {
+		var rule = rules[key];
+		if(!Utils.isExpiredDate(rule.expires)){
+			if (rule.condition == "between") {
+				setBetweenRule(rule, isHalfHourType);
+			}
+		}
+	}
 }
 
 var startHour = 7;
@@ -209,6 +240,7 @@ var initScrollEvent = function(){
 var Reservation = new Vue ({
 	el: "#app",
 	data: {
+		isHalfHourType: true, //TODO: Afegir-ho a la config del resource
 		hours: hours,
 		currenDate: Utils.getCurrentDate(),
 		currentSelectedDate: Utils.getCurrentDate(),
@@ -227,7 +259,11 @@ var Reservation = new Vue ({
 		imagesLength: 5,
 		pathSiluetes: "./img/siluetes/",
 		user: {cupons:[]},
+		userCopy: {},
+		resourceData: {},
 		arrReservations: arrReservations,
+		currentReservationPrice: 0,
+		lightsOn: false,
 		loading: true,
 		helpText: "",
 		helpDrawed: false,
@@ -236,9 +272,11 @@ var Reservation = new Vue ({
 	},
 	methods: {
 		init: function () {
+		  $("#canvas-container").hide();
 		  initScrollEvent();
 		  this.initDatePicker();
 		  this.loadUserData();
+		  this.loadResourceData();
 		  this.updateReservations();
 	    },
 	    getSilueta: function(isMan, isFirstRow){
@@ -353,7 +391,7 @@ var Reservation = new Vue ({
 			}, 3500);
 	    },
 	    switchHtmlOverflow: function(enable){
-	    	if (this.getScreenWidth < 1200) { //Només s'aplica en mobile
+	    	if (this.getScreenWidth() < 1200) { //Només s'aplica en mobile
 		    	var overflow = enable ? "inherit" : "hidden";
 		    	$("html").css("overflow", overflow);
 	    	}
@@ -397,10 +435,11 @@ var Reservation = new Vue ({
 			  }
 			  
 			  this.loading = false;
-			  if (!this.helpDrawed){
+			  //Descomentar si es vol que es mostri al principi
+			  /*if (!this.helpDrawed){
 			  	this.drawHelp();
 			  	this.helpDrawed = true;
-			  }
+			  }*/
 			});
 		},
 		loadUserData: function () {
@@ -409,9 +448,18 @@ var Reservation = new Vue ({
       				firebase.database().ref('users/' + user.uid).once('value').then((snapshot) => {
 					  console.log(snapshot.val());
 					  this.user = snapshot.val();
+					  this.userCopy = Utils.copyJson(this.user);
 					});
       			}
       		});
+		},
+		loadResourceData: function () {
+			firebase.database().ref('resources/pista1').once('value').then((snapshot) => {
+			  console.log(snapshot.val());
+			  this.resourceData = snapshot.val();
+			  setHoursResourceSettings(this.resourceData.lightsLimit, this.resourceData.price["default"], this.isHalfHourType);
+			  setPriceRules(this.resourceData.price["rules"], this.isHalfHourType);
+			});
 		},
 		selectHour: function(event) {
 			selectHour(event);
@@ -460,7 +508,25 @@ var Reservation = new Vue ({
 		clearReservation: function() {
 			resetAvailableHours(false, true);
 		},
+		calculateReservationPrice: function() {
+			this.currentReservationPrice = 0;
+			var numHours = 0;
+			var currentHour = minHour;
+			while (currentHour !== maxHour) {
+				this.currentReservationPrice += hours[currentHour].price;
+				currentHour = Utils.getNextHour(currentHour);
+				++numHours;
+			}
+			this.currentReservationPrice += hours[currentHour].price;
+			
+			//Activem llums?
+			this.lightsOn = hours[currentHour].lightsOn;
+			if(this.lightsOn){
+				this.currentReservationPrice += this.isHalfHourType ? numHours*2/2 : numHours*2; //TODO: configurar preu hora i multiplicar pel nombre d'hores de reserva
+			}
+		},
 		addNewReservation: function(){
+			this.calculateReservationPrice();
 			$('#confirmDialog').modal('show');
 		},
 		showProfileDialog: function(){
@@ -477,7 +543,7 @@ var Reservation = new Vue ({
 				  type: "POST",
 				  url: EDIT_USER_URL,
 				  headers: {"Authorization" : "Bearer " + idToken},
-				  data: this.user,
+				  data: this.userCopy,
 				  success: function(res) {
 				  	console.log(res)
 				  },
@@ -489,6 +555,10 @@ var Reservation = new Vue ({
 			}).catch(function(error) {
 			  // Handle error
 			});
+		},
+		cancelNewUserData: function() {
+			this.userCopy = Utils.copyJson(this.user);
+			this.editingUserData = false;
 		},
 		confirmNewReservation: function(){
 			var self = this;

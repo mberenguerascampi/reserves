@@ -97,6 +97,7 @@
               <p class='reservation-hour-label'> {{ hour.id }} </p>
               <p class='reservation-hour-state'> {{ hour.state }} </p>
               <i class="material-icons state-icon">{{ getIcon(hour) }}</i>
+              <i v-if="hour.lightsOn" class="material-icons light-icon">&#xE90F;</i>
             </div>
             <div v-bind:class="hours['23:30'].state" class="reservation-hour-last-div">
               <p class='reservation-hour-label reservation-hour-last-label'> 24:00 </p>
@@ -155,7 +156,7 @@
                     <li><span class="list-key">Dia:</span> {{ currentSelectedDate }}</li>
                     <li><span class="list-key">Hora inici:</span> {{ hourIniLabel() }} h</li>
                     <li><span class="list-key">Hora fi:</span> {{ hourFiLabel() }} h</li>
-                    <li><span class="list-key">Preu:</span> -</li>
+                    <li><span class="list-key">Preu:</span> {{ currentReservationPrice }}€</li>
                   </ul>
                   <button type="button" id="confirm-reservation-btn" class="btn btn-success text-center" v-on:click="confirmNewReservation">Confirmar</button>
                 </div>
@@ -207,24 +208,31 @@
                         <span class="list-key">{{ cupo.value }}€</span> <span class="list-value-undefined">Caduca el {{ cupo.expiredDate }}</span>
                       </li>
                     </ul>
-                    <button type="button" id="confirm-reservation-btn" class="btn btn-success text-center" v-on:click="changeUserData">Modificar dades</button>
+                    <button type="button" id="change-profile-btn" class="btn btn-success text-center" v-on:click="changeUserData">Modificar dades</button>
                   </div>
-                  <div id="user-show-info" v-show="editingUserData">
+                  <div id="user-change-info" v-show="editingUserData">
                     <ul class="list-inline">
                       <li>
-                        <label class="list-key">Nom:</label> 
-                        <input v-model="user.displayName">
+                        <label class="list-key profile-key">Nom:</label> 
+                        <input class="profile-input" v-model="userCopy.displayName">
                       </li>
                       <li>
-                        <label class="list-key">Email:</label> 
-                        <input v-model="user.email">
+                        <label class="list-key profile-key">Email:</label> 
+                        <input class="profile-input" v-model="userCopy.email">
                       </li>
                       <li>
-                        <label class="list-key">Telèfon:</label>
-                        <input v-model="user.phone">
+                        <label class="list-key profile-key">Telèfon:</label>
+                        <input class="profile-input" v-model="userCopy.phone">
                       </li>
                     </ul>
-                    <button type="button" id="confirm-reservation-btn" class="btn btn-success text-center" v-on:click="confirmNewUserData">Confirmar dades</button>
+                    <div class="row">
+                      <div class="col col-left">
+                        <button type="button" id="cancel-change-profile-btn" class="btn btn-secondary text-center" v-on:click="cancelNewUserData">Cancel·lar</button>
+                      </div>
+                      <div class="col col-right">
+                        <button type="button" id="confirm-change-profile-btn" class="btn btn-success text-center" v-on:click="confirmNewUserData">Confirmar</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

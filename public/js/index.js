@@ -1,3 +1,6 @@
+const BASE_URL = "https://us-central1-accesscontrol-f2410.cloudfunctions.net/";
+const EDIT_USER_URL = BASE_URL + "editUser";
+
 var Login = new Vue ({
 	el: "#loginPopup",
 	data: {
@@ -8,6 +11,7 @@ var Login = new Vue ({
 		phone: "",
 		errorMsg: "",
 		signUpErrorMsg: "",
+		loginTitle: "Inicia la sessió",
 		displayEmailForm: true,
 		displaySignUpForm: false
 	},
@@ -27,9 +31,11 @@ var Login = new Vue ({
 			});
 	    },
 	    passwordRecovery: function () {
+	    	this.loginTitle = "Recupera la contrasenya";
 			this.displayEmailForm = false;
 	    },
 	    cancelPasswordRecovery: function () {
+	    	this.loginTitle = "Inicia la sessió";
 			this.displayEmailForm = true;
 	    },
 	    sendPasswordRecovery: function () {
@@ -41,6 +47,7 @@ var Login = new Vue ({
 		    });
 	    },
 	    showSignUpForm: function () {
+	    	this.loginTitle = "Registra't";
 			this.displaySignUpForm = true;
 	    },
 	    signUp: function () {
@@ -49,15 +56,37 @@ var Login = new Vue ({
 	    		return;
 	    	}
 
-	    	var self = this;
-			firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
-			  // Handle Errors here.
-			  var errorCode = error.code;
-			  self.signUpErrorMsg = error.message;
-			  // ...
+			firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(() => {
+				firebase.auth().currentUser.getIdToken(true).then((idToken) => {
+					var userData = {"displayName": this.name, "phone": this.phone, "email": this.email}
+				  	// Send token to your backend via HTTPS
+					$.ajax({
+					  type: "POST",
+					  url: EDIT_USER_URL,
+					  headers: {"Authorization" : "Bearer " + idToken},
+					  data: userData,
+					  success: function(res) {
+					  	var url = window.location.origin + "/reserves.html";
+      		  			window.location = url;
+					  },
+					  error: function(err) {
+					  	console.log(err)
+					  	this.signUpErrorMsg = "S'ha produït un error";
+					  },
+					  dataType: "application/json"
+					});
+				}).catch((error) => {
+			 		console.log(error)
+				});
+			}).catch((error) => {
+			    console.log(error)
+				// Handle Errors here.
+				var errorCode = error.code;
+				this.signUpErrorMsg = error.message;
 			});
 	    },
 	    cancelSignUp: function () {
+	    	this.loginTitle = "Inicia la sessió";
 			this.displaySignUpForm = false;
 	    },
 	    errorLabelDisplay: function(){
@@ -114,7 +143,6 @@ interact('.draggable')
 
 var updateInstrSize = function(){
 	var intrWidth = parseInt($(".img-instructions").css("width").replace("px",""));
-	console.log(intrWidth);
     $(".img-instructions").css("height", Math.round(intrWidth*0.5625));
 }
 

@@ -135,6 +135,7 @@
 /* LOGIN */
 #loginPopup .modal-body{
     background-color: #f8f9fa;
+    padding: 12px;
 }
 
 .sign-btn{
@@ -150,14 +151,34 @@
 #otherOptionsLabel{
     text-align: center;
     margin-top: 2px;
-    padding-top: 14px;
+    padding-top: 14px !important;
+    padding-bottom: 6px !important;
     font-size: 0.9em;
     font-style: italic;
    
    /* border-top: 1px solid #e8e8e8;*/
-   -webkit-box-shadow: 0px -1px 4px 0px rgba(0,0,0,0.14);
+   -webkit-box-shadow: 0px -2px 4px 0px rgba(0,0,0,0.14);
+    -moz-box-shadow: 0px -2px 4px 0px rgba(0,0,0,0.14);
+    box-shadow: 0px -2px 4px 0px rgba(0,0,0,0.14);
+}
+
+.firebaseui-card-actions-signup {
+    background-color: #eaeaea;
+
+    -webkit-box-shadow: 0px -1px 4px 0px rgba(0,0,0,0.14);
     -moz-box-shadow: 0px -1px 4px 0px rgba(0,0,0,0.14);
     box-shadow: 0px -1px 4px 0px rgba(0,0,0,0.14);
+
+    padding-top: 18px !important;
+    font-weight: bold;
+}
+
+.firebase-email-card {
+    padding-top: 5px !important;
+}
+
+.mdl-textfield {
+    padding: 24px 0px !important;
 }
 
 .mdl-textfield {
@@ -186,6 +207,9 @@
 
 #signUpLink {
     text-align: center;
+    width: 100%;
+    float: left;
+    font-weight: bold;
 }
 
 #firebaseui-auth-container-popup .firebaseui-idp-text-long {
@@ -198,6 +222,23 @@
 
 #firebaseui-auth-container-popup .modal-title {
     font-size: 0.8em !important;
+}
+
+.firebaseui-error-wrapper {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.firebase-forget-password {
+    font-size: 0.9em;
+}
+
+.mdl-textfield__label {
+    top: 2px !important;
+}
+
+.firebaseui-container {
+    padding-top: 3px;
 }
 
 .img-instructions{
@@ -223,6 +264,34 @@
 
 #contact{
     padding-bottom: 24px !important;
+}
+
+.conditions-modal .modal-dialog {
+    margin: 0px;
+    width: 60%;
+    margin-left: 20%;
+    max-width: 2000px;
+}
+
+.conditions-modal h2 {
+    text-align: center;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+#loginPopup .modal-dialog {
+    max-width: 450px;
+}
+
+#loginPopup .modal-header {
+    padding: 8px;
+}
+
+#login-title{
+    text-align: center;
+    width: 100%;
 }
 
 @media (max-width: 1200px) {

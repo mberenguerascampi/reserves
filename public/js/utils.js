@@ -89,6 +89,23 @@ var Utils = (function () {
 		return dateToString(date);
 	}
 
+	var copyJson = function(json){
+		var jsonRet = {};
+		for (key in json) {
+			jsonRet[key] = json[key];
+		}
+
+		return jsonRet;
+	}
+
+	var isExpiredDate = function(strDate){
+		if (typeof strDate !== "string") return false; //Utilitzem -1 per definir l'infinit
+
+		var date = stringToDate(strDate);
+
+		return new Date() > date;
+	}
+
 	return {
 		getNextHour: getNextHour,
 		getPreviousHour: getPreviousHour,
@@ -97,6 +114,8 @@ var Utils = (function () {
 		stringToDate: stringToDate,
 		dateToString: dateToString,
 		incrDate: incrDate,
-		decrDate: decrDate
+		decrDate: decrDate,
+		isExpiredDate: isExpiredDate,
+		copyJson: copyJson
 	}
 })();
