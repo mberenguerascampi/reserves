@@ -132,6 +132,10 @@
     visibility: visible;
 }
 
+.terms_link{
+    color: black !important;
+}
+
 /* LOGIN */
 #loginPopup .modal-body{
     background-color: #f8f9fa;
@@ -262,6 +266,10 @@
     font-size: 1.3em;
 }
 
+.tel-div a {
+    color: white !important;
+}
+
 #contact{
     padding-bottom: 24px !important;
 }
@@ -279,6 +287,18 @@
 
 .bold-text{
     font-weight: bold;
+}
+
+.mdl-button--raised.mdl-button--colored {
+    background: #4285f4 !important;
+}
+
+.mdl-button--raised.mdl-button--colored:hover {
+    background-color: #5695fd !important;
+}
+
+.mdl-button--raised.mdl-button--colored:active {
+    background-color: #4285f4 !important;
 }
 
 #loginPopup .modal-dialog {
@@ -338,11 +358,25 @@
     section h3.section-subheading {
         margin-bottom: 65px !important;
     }
+
+    .conditions-modal .modal-dialog{
+        width: 80%;
+        margin-left: 10%;
+    }
 }
 
 @media (max-width: 600px) {
     .img-instructions{
         width: 85%;
+    }
+
+    .conditions-modal .modal-dialog{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    section h3.section-subheading {
+        margin-bottom: 44px !important;
     }
 }
 

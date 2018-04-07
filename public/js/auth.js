@@ -32,7 +32,7 @@ var uiConfig = {
 	    // Required to enable ID token credentials for this provider.
 	    clientId: "1080277297588-03i4q9hjf47epmoes1i0m03nuujtpt6l.apps.googleusercontent.com"
 	},
-	/*{
+	{
         provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         scopes :[
           'public_profile',
@@ -40,12 +40,12 @@ var uiConfig = {
           'user_likes',
           'user_friends'
         ]
-     },*/
-    {
+     },
+    /*{
       provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
       // Whether the display name should be displayed in Sign Up page.
       requireDisplayName: true
-    }
+    }*/
   ],
   // Terms of service url.
   tosUrl: '<your-tos-url>',

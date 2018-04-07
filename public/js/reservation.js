@@ -517,12 +517,14 @@ var Reservation = new Vue ({
 				currentHour = Utils.getNextHour(currentHour);
 				++numHours;
 			}
+			++numHours;
 			this.currentReservationPrice += hours[currentHour].price;
 			
 			//Activem llums?
 			this.lightsOn = hours[currentHour].lightsOn;
 			if(this.lightsOn){
-				this.currentReservationPrice += this.isHalfHourType ? numHours*2/2 : numHours*2; //TODO: configurar preu hora i multiplicar pel nombre d'hores de reserva
+				var lightsPrice = this.resourceData.lightsPrice;
+				this.currentReservationPrice += this.isHalfHourType ? numHours*lightsPrice/2 : numHours*lightsPrice; //TODO: configurar preu hora i multiplicar pel nombre d'hores de reserva
 			}
 		},
 		addNewReservation: function(){
